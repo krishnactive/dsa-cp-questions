@@ -1,0 +1,19 @@
+#include <gmpxx.h>
+
+void kaprekarNumbers(int p, int q) {
+    vector<int> x;
+    for (int i = p; i <= q; i++) {
+        mpz_class j = i * i;
+        string d = j.get_str();
+        int l = d.size() - d.size() / 2;
+        mpz_class p = mpz_class(10) ** l;
+        mpz_class n = j / p;
+        mpz_class m = j % p;
+        if (n + m == i) {
+            x.push_back(i);
+        }
+    }
+    for (auto &o : x) {
+        cout << o << " ";
+    }
+}

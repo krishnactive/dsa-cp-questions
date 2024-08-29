@@ -1,0 +1,1 @@
+{"name":"Local: bigint","url":"c:\\C++COURSE\\.vscode\\class\\question\\bigint.cpp","tests":[{"id":1685291007863,"input":"4","output":""},{"id":1685365521351,"input":"5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\C++COURSE\\.vscode\\class\\question\\bigint.cpp","group":"local","local":true}

@@ -1,0 +1,112 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define ll long long
+#define lld long double
+#define pb push_back
+#define vi vector<int>
+#define vc vector<char>
+#define vl vector<ll>
+#define ump unordered_map
+#define uset unordered_set
+#define mset multiset
+#define minA(v) *min_element(v.begin(),v.end())
+#define maxA(v) *max_element(v.begin(),v.end())
+#define st(v) sort(v.begin(),v.end())
+#define fin(a,n) for(int i=0;i<n;i++){ll x; cin>>x;a.pb(x);} 
+#define f(n) for(ll i=0;i<n;i++)
+#define f1(n) for(ll i=1;i<n;i++)
+#define int long long
+#define min fmin
+#define max fmax
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
+
+int rng(int lim) {
+  uniform_int_distribution<int> uid(0,lim-1);
+  return uid(rang);
+}
+
+void solve() {
+    ll n,k;
+    cin>>n>>k;
+    vl a;
+    int nn=2*n;
+    fin(a,nn);
+
+    map<int,int>fre;
+    map<int,int>fre1;
+    for(int i=0;i<n;i++){
+        fre[a[i]]++;
+    }
+    for(int i=n;i<2*n;i++){
+        fre1[a[i]]++;
+    }
+    k=k*2;
+    int kk=k;
+    vl ans1;
+    vl ans2;
+    for(auto i:fre){
+        if(k>=2){
+        if(i.second==2){
+            ans1.pb(i.first);
+            ans1.push_back(i.first);
+            k-=2;
+        }
+        }
+        else break;
+    }
+    int ss = ans1.size();
+    
+    for(auto i:fre){
+        if(k>0){
+        if(i.second==1){
+            ans1.pb(i.first);
+            ans2.push_back(i.first);
+            k--;
+        }
+        }
+        else break;
+    }
+    k=kk;
+    for(auto i:fre1){
+        if(ss>0){
+        if(i.second==2){
+            ans2.pb(i.first);
+            ans2.pb(i.first);   
+            ss-=2;
+        }
+        }
+        else break;
+    }
+
+    for(auto x:ans1){
+        cout<<x<<" ";
+    }
+    cout<<"\n";
+    for(auto x:ans2){
+        cout<<x<<" ";
+    }
+  cout<<"\n";
+
+}
+
+signed main() {
+    fastio
+    srand(chrono::high_resolution_clock::now().time_since_epoch().count());
+    cout << setprecision(15);
+
+    #ifndef ONLINE_JUDGE 
+        freopen("input1.txt", "r", stdin);
+        freopen("output1.txt", "w", stdout);
+    #endif
+    
+    int t = 1;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+
+    return 0;
+}
+// This is krishna.
