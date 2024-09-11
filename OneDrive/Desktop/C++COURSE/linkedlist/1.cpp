@@ -37,6 +37,17 @@ void print(Node* head){
     cout<<endl;
 }
 
+//(size)
+int sz(Node* head){
+    int n = 0;
+    while (head!=NULL)
+    {
+        n++;
+        head = head->next;
+    }
+    return n;
+}
+
 
 //delete and insertion in linked list 
 
@@ -61,6 +72,33 @@ Node* deletetail(Node* head){
 
 }
 
+//delete kth element
+Node* kth(Node* head, int k){
+    // int n = sz(head);
+    if(head==nullptr){
+        return nullptr;
+    }
+    if(k==1){
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return head;
+    } 
+    int n = 0;
+    Node* temp = head ;
+    Node* pre = NULL;
+    while(temp!=nullptr){
+        n++;
+        if(n==k){
+            pre->next = pre->next->next;
+            delete temp;
+            break;
+        }
+        pre = temp;
+        temp = temp->next;
+    }
+    return head;
+}
 
 int main(){
     vector<int> arr = {12, 5, 8,7};
@@ -68,9 +106,9 @@ int main(){
     // cout<<y->data;
     //pointer to this memory
     Node* head = convertArr2LL(arr);
-
+    head = kth(head,0);
     // head = removeHead(head);
-    head = deletetail(head);
+    // head = deletetail(head);
     print(head);
     // cout<<head->data;
     // Node* temp = head;
