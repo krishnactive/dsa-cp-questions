@@ -27,6 +27,39 @@ Node* convertArr2LL(vector<int>&arr){
     }
     return head;
 }
+//print
+void print(Node* head){
+    while (head!=NULL)
+    {
+        cout<<head->data<<" ";
+        head = head->next;
+    }
+    cout<<endl;
+}
+
+
+//delete and insertion in linked list 
+
+Node* removeHead(Node* head){
+    if(head==NULL) return head;
+    Node* temp = head;
+    head = head->next;
+    delete temp;
+    return head;
+}
+
+Node* deletetail(Node* head){
+    if(head==nullptr||head->next==nullptr)return nullptr;
+    Node* temp = head;
+    while(temp->next->next!=nullptr){
+        temp=temp->next;
+    }
+    free(temp->next);
+    temp->next = nullptr;
+    return head;
+
+}
+
 
 int main(){
     vector<int> arr = {12, 5, 8,7};
@@ -34,10 +67,14 @@ int main(){
     // cout<<y->data;
     //pointer to this memory
     Node* head = convertArr2LL(arr);
+
+    // head = removeHead(head);
+    head = deletetail(head);
+    print(head);
     // cout<<head->data;
-    Node* temp = head;
-    while(temp){
-        cout<<temp->data<<" ";
-        temp=temp->next;
-    }
+    // Node* temp = head;
+    // while(temp){
+    //     cout<<temp->data<<" ";
+    //     temp=temp->next;
+    // }
 }
