@@ -44,7 +44,7 @@ void solve() {
         }
 
         int ans = 1e9;
-        for (auto xx : m) {
+        for (auto &xx : m) {
             string k = xx.first;
             set<int> &v = xx.second;
             if (k == s[x] || k == s[y]) continue;
