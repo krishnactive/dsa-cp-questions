@@ -18,6 +18,9 @@ struct Node{
 };
 
 Node* convertArr2LL(vector<int>&arr){
+    if(arr.size()==0){
+        return nullptr;
+    }
     Node* head = new Node(arr[0]);
     Node* mover = head;
     for(int i = 1;i<arr.size();i++){
@@ -124,13 +127,65 @@ Node* kth(Node* head, int k){
     return head;
 }
 
+
+Node* insertHead(Node* head, int val){
+    Node* temp = new Node(val, head);
+    return temp;
+}
+
+Node* inserttail(Node* head, int val){
+    if(head == NULL){
+        head = new Node(val);
+        return head;
+    }
+    Node* temp = head;
+    while(temp->next!=NULL){
+        temp = temp->next;
+    }
+    Node* tail = new Node(val);
+    temp->next = tail;
+    return head;
+}
+
+
+Node* insertPosition(Node* head, int ele, int k){
+    if(head == NULL){
+        if(k == 1){
+            return new Node(ele);
+        }
+        else {
+            return head;
+        }
+    }
+    if(k == 1){
+        return new Node(ele, head);
+    }
+    int cnt = 0;
+    Node* temp = head;
+    while(temp!=NULL){
+        cnt++;
+        if(cnt == k-1){
+            Node* x = new Node(ele, temp->next);
+            temp->next = x;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+}
+
+
+
 int main(){
-    vector<int> arr = {12, 5, 8,7};
+    vector<int> arr = {2,4,5,66,32};
     // Node* y = new Node(arr[0]);
     // cout<<y->data;
     //pointer to this memory
     Node* head = convertArr2LL(arr);
-    head = valuedel(head,13);
+    head = insertPosition(head,1000,1);
+    // head = inserttail(head,99);
+    // head = valuedel(head,13);
+    // head = insertHead(head,100);
     // head = kth(head,1);
     // head = removeHead(head);
     // head = deletetail(head);
