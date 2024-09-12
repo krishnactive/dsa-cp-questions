@@ -174,6 +174,29 @@ Node* insertPosition(Node* head, int ele, int k){
     return head;
 }
 
+//inserting at element before the value x; 
+
+Node* insertbefX(Node*head, int val, int x){
+    if(head == NULL){
+        return head ;
+    }
+    if(head->data==x){
+        return new Node(val, head);
+    }
+
+    Node* temp = head;
+
+    while(temp!=NULL){
+        if(temp->next->data==x){
+            Node* t = new Node(val,temp->next);
+            temp->next = t;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+
+}
 
 
 int main(){
@@ -182,7 +205,8 @@ int main(){
     // cout<<y->data;
     //pointer to this memory
     Node* head = convertArr2LL(arr);
-    head = insertPosition(head,1000,1);
+    head = insertbefX(head, 55, 2);
+    // head = insertPosition(head,1000,1);
     // head = inserttail(head,99);
     // head = valuedel(head,13);
     // head = insertHead(head,100);

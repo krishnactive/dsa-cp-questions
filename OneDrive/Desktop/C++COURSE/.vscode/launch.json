@@ -38,8 +38,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Lenovo/OneDrive/Desktop/C++COURSE/cses_again",
-      "program": "c:/Users/Lenovo/OneDrive/Desktop/C++COURSE/cses_again/build/Debug/outDebug",
+      "cwd": "c:/Users/Lenovo/OneDrive/Desktop/C++COURSE/linkedlist",
+      "program": "c:/Users/Lenovo/OneDrive/Desktop/C++COURSE/linkedlist/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
