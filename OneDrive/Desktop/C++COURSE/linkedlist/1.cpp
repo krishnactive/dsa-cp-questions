@@ -72,6 +72,30 @@ Node* deletetail(Node* head){
 
 }
 
+Node* valuedel(Node* head, int val){
+    if(head==nullptr){
+        return nullptr;
+    }
+    if(head->data==val){
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return head;        
+    }
+    Node* temp = head;
+    Node* pre = NULL;
+    while(temp!=nullptr){
+        if(temp->data==val){
+            pre->next = pre->next->next;
+            delete temp;
+            break;
+        }
+        pre = temp;
+        temp = temp->next;
+    }
+    return head;
+}
+
 //delete kth element
 Node* kth(Node* head, int k){
     // int n = sz(head);
@@ -106,7 +130,8 @@ int main(){
     // cout<<y->data;
     //pointer to this memory
     Node* head = convertArr2LL(arr);
-    head = kth(head,0);
+    head = valuedel(head,13);
+    // head = kth(head,1);
     // head = removeHead(head);
     // head = deletetail(head);
     print(head);
