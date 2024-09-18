@@ -148,13 +148,35 @@ Node* insertBeforeTail(Node* head, int val){
     return head;
 }
 
+// insert before kth element 
+Node* insertBeforeKthelement(Node* head, int k ,int val){
+    if(k==1){
+        return insertBeforeHead(head, val);
+    }
+    Node* temp = head;
+    int cnt = 0;
+    while(temp!=NULL){
+        cnt++;
+        if(cnt == k)break;
+        temp = temp->next;
+    }
+    Node* prev = temp->back;
+    Node* newNode = new Node(val, temp,prev);
+    prev->next = newNode;
+    temp->back = newNode;
+    return head;
+
+}   
+
+
 int main(){
 
     vector<int> fr = { 3,4,5,7 };
     Node* head = convertArr2dll( fr );
      print( head );
      cout<<"\n";
-     head = insertBeforeTail(head, 100);
+     head = insertBeforeKthelement(head, 2,10000);
+    //  head = insertBeforeTail(head, 100);
     //  head = insertBeforeHead(head,100);
     //  deleteNode(head->next->next->next);
     // head = removekthelement(head, 4);
