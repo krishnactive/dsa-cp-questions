@@ -103,6 +103,23 @@ Node* removekthelement(Node* head, int k){
 
     return head;
 }
+//delete the node of the dll (node!=head)
+void deleteNode(Node* temp){
+    Node* prev = temp->back;
+    Node* front = temp->next;
+
+    if(front == NULL){
+        prev->next = nullptr;
+        temp->back = nullptr;
+        free(temp);
+        return;
+    }
+    prev->next = front;
+    front->back = prev;
+
+    temp->next = temp->back = nullptr;
+    free(temp);
+}
 
 
 int main(){
@@ -111,7 +128,8 @@ int main(){
     Node* head = convertArr2dll( fr );
      print( head );
      cout<<"\n";
-    head = removekthelement(head, 4);
+     deleteNode(head);
+    // head = removekthelement(head, 4);
     // head = deletehead( head );
     // head = deletetail(head);
     print( head );
