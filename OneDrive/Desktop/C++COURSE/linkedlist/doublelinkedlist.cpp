@@ -121,6 +121,16 @@ void deleteNode(Node* temp){
     temp->next = temp->back = nullptr;
     free(temp);
 }
+//insertion before head 
+//................tail 
+//................Kth
+//................Node
+Node* insertBeforeHead(Node* head, int val){
+    Node* newHead = new Node(val, head, nullptr);
+    head->back = newHead;
+
+    return newHead;
+}
 
 
 int main(){
@@ -129,7 +139,8 @@ int main(){
     Node* head = convertArr2dll( fr );
      print( head );
      cout<<"\n";
-     deleteNode(head->next->next->next);
+     head = insertBeforeHead(head,100);
+    //  deleteNode(head->next->next->next);
     // head = removekthelement(head, 4);
     // head = deletehead( head );
     // head = deletetail(head);
