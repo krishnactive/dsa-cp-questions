@@ -168,6 +168,13 @@ Node* insertBeforeKthelement(Node* head, int k ,int val){
 
 }   
 
+//insertbeforegivenNODE
+void insertBeforeNode(Node* node, int val){
+    Node* prev = node->back;
+    Node* newNode = new Node(val,node,prev);
+    prev->next = newNode;
+    node->back = newNode;
+}
 
 int main(){
 
@@ -175,7 +182,8 @@ int main(){
     Node* head = convertArr2dll( fr );
      print( head );
      cout<<"\n";
-     head = insertBeforeKthelement(head, 2,10000);
+     insertBeforeNode(head,1000000);
+    //  head = insertBeforeKthelement(head, 2,10000);
     //  head = insertBeforeTail(head, 100);
     //  head = insertBeforeHead(head,100);
     //  deleteNode(head->next->next->next);
@@ -185,3 +193,5 @@ int main(){
     print( head );
 
 }
+
+//doubly linked list is used in web browser 
