@@ -132,6 +132,21 @@ Node* insertBeforeHead(Node* head, int val){
     return newHead;
 }
 
+//insertion before tail 
+Node* insertBeforeTail(Node* head, int val){
+    if(head->next==NULL){
+        return insertBeforeHead(head, val);
+    }
+    Node* tail = head;
+    while(tail->next != NULL){
+        tail = tail->next;
+    }
+    Node* prev = tail->back;
+    Node* newNode = new Node(val, tail, prev);
+    prev->next = newNode;
+    tail->back = newNode;
+    return head;
+}
 
 int main(){
 
@@ -139,7 +154,8 @@ int main(){
     Node* head = convertArr2dll( fr );
      print( head );
      cout<<"\n";
-     head = insertBeforeHead(head,100);
+     head = insertBeforeTail(head, 100);
+    //  head = insertBeforeHead(head,100);
     //  deleteNode(head->next->next->next);
     // head = removekthelement(head, 4);
     // head = deletehead( head );
