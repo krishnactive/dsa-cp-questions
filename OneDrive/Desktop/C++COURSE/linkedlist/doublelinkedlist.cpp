@@ -103,7 +103,8 @@ Node* removekthelement(Node* head, int k){
 
     return head;
 }
-//delete the node of the dll (node!=head)
+//delete the node of the dll (node!=head) because then we need to return next element as head which we not doing we are only deleting element not returning head;
+
 void deleteNode(Node* temp){
     Node* prev = temp->back;
     Node* front = temp->next;
@@ -128,7 +129,7 @@ int main(){
     Node* head = convertArr2dll( fr );
      print( head );
      cout<<"\n";
-     deleteNode(head);
+     deleteNode(head->next->next->next);
     // head = removekthelement(head, 4);
     // head = deletehead( head );
     // head = deletetail(head);
