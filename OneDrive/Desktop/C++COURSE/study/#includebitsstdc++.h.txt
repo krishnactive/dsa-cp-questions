@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+# define ll long long
+# define pb push_back 
+# define vec vector<int>
+# define in int t; cin>>t; while(t--)
+using namespace std;
+int maxx(vector<ll>a){
+    return max(max(a[0]+a[2],a[0]),max(a[1],a[2]));
+}
+void solve(){
+    ll n;
+    cin>>n;
+    vector<ll>charges(n);
+
+    for (int i=0 ; i<n; i++){
+        cin>>charges[i];
+    }
+if(n<3){
+    cout<<*max_element(charges.begin(),charges.end());
+}
+else if(n==3){
+    cout<<maxx(charges)<<'\n';
+}
+else{
+    
+    ll ma = charges[0]+charges[2];
+    while(charges.size()>3){
+        int ii=0;
+        for(int i=0;i<=charges.size()-3;i++){
+            ll sum=charges[i]+charges[i+2];
+            if(ma<=sum){
+                ma=sum;
+                ii=i;
+            }
+        }
+        charges[ii]+=charges[ii+2];
+        charges.erase(charges.begin()+ii+1,charges.begin()+ii+3);
+        if(charges.size()==3){
+            cout<<maxx(charges)<<'\n';
+            break;
+        }
+        if(charges.size()==2){
+            cout<<*max_element(charges.begin(),charges.end())<<'\n';
+            break;
+        }
+    }
+    //  for(auto s:charges){
+    //     cout<<s;
+    // }
+    //cout<<*max_element(charges.begin(),charges.end())<<'\n';
+
+}
+//cout<<charges.size()<<'\n';
+}
+int main(){
+    in{
+        solve();
+
+}
+return 0;
+}
+//This is krishna.

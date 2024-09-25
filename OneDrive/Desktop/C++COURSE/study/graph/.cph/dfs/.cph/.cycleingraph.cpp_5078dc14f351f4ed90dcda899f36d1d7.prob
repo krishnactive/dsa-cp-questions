@@ -1,0 +1,1 @@
+{"name":"Local: cycleingraph","url":"c:\\Users\\Lenovo\\OneDrive\\Desktop\\study\\graph\\.cph\\dfs\\cycleingraph.cpp","tests":[{"id":1700288519378,"input":"8 6\n1 2\n2 3\n2 4\n3 5\n6 7\n1 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\OneDrive\\Desktop\\study\\graph\\.cph\\dfs\\cycleingraph.cpp","group":"local","local":true}

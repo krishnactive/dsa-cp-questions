@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+# define ll long long
+# define pb push_back 
+# define vec vector<int>
+# define in int t; cin>>t; while(t--)
+using namespace std;
+int main(){
+    in{
+int n,k;
+cin>>n>>k;
+string s;
+cin>>s;
+multiset<char>ch;
+for(auto x:s){
+    ch.insert(x);
+}
+int j=0;
+vector<char>ans(n);
+vector<int>ad;
+vector<int>ind;
+auto it=ch.begin();
+for(j;j<n;j++){
+    for(int i=0;i<n;i++){
+        if(*it==s[i]){
+        if(i%(k-1)==0||(i+1)%k==2||(i+1)%2!=0){
+            ans[j]=*it;
+        }
+        else{ //ad.pb(*it);
+        //ind.pb(j);
+        //ans[j]=s[i];
+        }
+
+    }
+    }
+    it++;
+}
+int yy=0,xx=0;
+
+for(auto x:ans) cout<<x;
+cout<<"\n";
+
+}
+return 0;
+}

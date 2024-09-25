@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(begin(nums),end(nums));
+        vector<vector<int>> ans;
+        vector<int> ds;
+        fn(0,nums,ans,ds);
+        return ans;
+    }
+    void fn(int ind,vector<int>& nums, vector<vector<int>>& ans, vector<int>& ds){
+        ans.push_back(ds);
+        for(int i = ind;i<nums.size();i++){
+            if(i!=ind&&nums[i]==nums[i-1])continue;
+            ds.push_back(nums[i]);
+            fn(i+1,nums,ans,ds);
+            ds.pop_back();
+        }
+    }
+
+};
+
+
+/*
+The function fn is a recursive function used to generate all unique subsets of a vector nums that might contain duplicates. The absence of a return statement in this function is intentional and does not prevent the function from working correctly. Here's an explanation of how it functions:
+
+Understanding the Function
+Base Case and Recursive Calls:
+
+The function does not have an explicit base case like many recursive functions, but it uses implicit control through the loop and the end of the recursion when i reaches nums.size().
+Each time the function fn is called, it adds the current subset stored in ds (decision space) to ans.
+Then it iterates over the elements starting from the index ind to the end of the vector nums.
+For each element, it checks if it is the same as the previous element. If it is, and i != ind, it skips this iteration to avoid duplicates.
+Recursive Subset Generation:
+
+If an element is not a duplicate (or it's the first element being considered), it is added to the current subset ds.
+The function then recursively calls itself with the next index (i + 1) and the updated subset.
+After the recursive call returns, the last element is removed from ds using ds.pop_back(), effectively backtracking to explore the next subset without the last included element.
+No Explicit Return Statement:
+
+Recursive functions in C++ do not always need an explicit return statement. If the function's purpose is to modify objects passed by reference (like ans and ds in this case), it performs its task without needing to return any value.
+Here, ans is updated directly as a reference, so all changes made to it persist after the function call ends.
+How It Works Without Return
+The absence of a return statement simply means the function will continue executing until it reaches the end of its code block or hits a control flow statement (like a loop break or conditional continue).
+When all paths through the function are exhausted, the function call returns naturally, without any explicit value, to the caller function (or the previous recursive level).
+In the context of generating subsets, once all possibilities from the current index ind have been explored, the function exits that recursion level and returns to the previous one, effectively unwinding the recursion stack step-by-step.
+Conclusion
+The function fn works correctly due to its design for modifying the results (ans) through reference parameters. The lack of a return statement does not hinder its operation because the recursive process and updates happen entirely within the stack frame of each function call. This design is common in recursive algorithms that generate combinations, permutations, or subsets where each recursive step processes part of the result space.
+*/

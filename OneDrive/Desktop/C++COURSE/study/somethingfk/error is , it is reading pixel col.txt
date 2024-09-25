@@ -1,0 +1,422 @@
+// error is , it is reading pixel color black
+
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <vector>
+#include <functional>
+#include <iostream>
+
+std::vector<std::pair<float, float>> points;
+std::vector<std::function<void()>> functionsToCall;
+std::vector<std::pair<float, float>> eraserCurves;
+std::vector<std::pair<float, float>> lineCurves(2);
+std::vector<std::pair<float, float>> lineCurves1(2);
+//std::pair<float,float> lineCurves[2];
+
+bool  isLining=false;
+bool isDrawing = false;
+bool pencilTool=true;
+bool eraserTool=false;
+bool isErasing=false;
+bool lineTool = false;
+bool paintTool =false;
+
+
+void lineToolrealtime(){
+    glColor3f(0.0f , 0.0f , 0.0f);
+    glLineWidth(3.0f);
+    glBegin(GL_LINE_STRIP);
+     for (const auto point : lineCurves) {
+            glVertex2f(point.first, point.second);
+        }
+
+    glEnd();
+}
+
+void linetool(std::vector<std::pair<float, float>> tempLinePoints){
+    glColor3f(0.0f , 0.0f , 0.0f);
+    glLineWidth(3.0f);
+    glBegin(GL_LINE_STRIP);
+     for (const auto point : tempLinePoints) {
+            glVertex2f(point.first, point.second);
+        }
+
+    glEnd();
+}
+
+void drawline(std::vector<std::pair<float, float>> tempPoints) {
+    // Draw lines
+
+        glColor3f(0.0f, 0.0f, 0.0f);
+        glLineWidth(10.0f);
+        glBegin(GL_LINE_STRIP);
+        for (const auto point : tempPoints) {
+            glVertex2f(point.first, point.second);
+        }
+        glEnd();
+
+
+
+}
+void drawlinerealtime(){
+     glColor3f(0.0f, 0.0f, 0.0f);
+        glLineWidth(10.0f);
+        glBegin(GL_LINE_STRIP);
+        for (const auto point : points) {
+            glVertex2f(point.first, point.second);
+        }
+        glEnd();
+
+}
+
+void EraserToolrealtime(){
+    //ERASER
+
+    glPointSize(20.0f);
+    glColor3f(1.0f,1.0f,1.0f);
+    glBegin(GL_POINTS);
+    std::cout<<"-";
+    for (const auto era:eraserCurves) {
+            glVertex2f(era.first, era.second);
+
+        }
+    //glVertex2f(0.0f,0.0f);
+    glEnd();
+
+
+
+}
+void EraserTool(std::vector<std::pair<float, float>> temperasePoints){
+    //ERASER
+    glPointSize(20.0f);
+    glColor3f(1.0f,1.0f,1.0f);
+    glBegin(GL_POINTS);
+    std::cout<<"-";
+    for (const auto era:temperasePoints) {
+            glVertex2f(era.first, era.second);
+
+        }
+    //glVertex2f(0.0f,0.0f);
+    glEnd();
+
+
+
+}
+void floodFill(int x, int y, GLubyte fillColor[3], GLubyte targetColor[3]) {
+
+    //if (x < 0 || x >= glutGet(GLUT_WINDOW_WIDTH) || y < 0 || y >= glutGet(GLUT_WINDOW_HEIGHT)) {
+        // Stop recursion if pixel is outside image boundaries
+        //return;
+    //}
+
+
+
+        std::cout<<std::endl<<"x : "<<x<<"y : "<<y<<std::endl;
+
+    float iposX = static_cast<float>(x);
+    float iposY = static_cast<float>(glutGet(GLUT_WINDOW_HEIGHT) - y);
+
+    //int iposX = x;
+    //int iposY = glutGet(GLUT_WINDOW_HEIGHT) - y;
+
+    float posX = (2.0f * (float)x / glutGet(GLUT_WINDOW_WIDTH)) - 1.0f;
+    float posY = 1.0f - (2.0f * (float)y / glutGet(GLUT_WINDOW_HEIGHT));
+    //glutPostRedisplay();
+
+
+
+
+    GLubyte pixelColor[3];
+    glReadPixels(iposX, iposY, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixelColor);
+        //std::cout << "R: " << (int)pixelColor[0] << " G: " << (int)pixelColor[1] << " B: " << (int)pixelColor[2] << std::endl;
+    //if (pixelColor[0] == fillColor[0] && pixelColor[1] == fillColor[1] && pixelColor[2] == fillColor[2]) {
+  //  return;
+//}
+
+
+
+
+    //glReadPixels(200, 500, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixelColor);
+    std::cout <<"pixelColor"<<"R: " << (int)pixelColor[0] << " G: " << (int)pixelColor[1] << " B: " << (int)pixelColor[2] << std::endl;
+    std::cout <<"fillColor"<<"R: " << (int)fillColor[0] << " G: " << (int)fillColor[1] << " B: " << (int)fillColor[2] << std::endl;
+
+    //code to end fn if not new pixel
+    if (pixelColor[0] != targetColor[0] || pixelColor[1] != targetColor[1] || pixelColor[2] != targetColor[2]) {
+        std::cout<<std::endl<<"lulululu"<<std::endl;
+        return;
+    }
+    //code to end fn if the pixel read is already filled
+
+     //else if (pixelColor[0] == fillColor[0] && pixelColor[1] == fillColor[1] && pixelColor[2] == fillColor[2]) {
+        //std::cout<<std::endl<<"hogya"<<std::endl;
+        //return;
+
+    //}
+
+    // Check if the pixel's color matches the target color
+    else if (pixelColor[0] == targetColor[0] && pixelColor[1] == targetColor[1] && pixelColor[2] == targetColor[2]) {
+        // Set the new color
+        //std::cout<<"testsuccess";
+        glColor3ub(fillColor[0], fillColor[1], fillColor[2]);
+        glPointSize(1.0f);
+        glBegin(GL_POINTS);
+        glVertex2f(posX, posY);
+        std::cout<<"drawhora"<<std::endl;
+
+        glEnd();
+        //glReadPixels(iposX, iposY, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixelColor);
+        //std::cout << "R: " << (int)pixelColor[0] << " G: " << (int)pixelColor[1] << " B: " << (int)pixelColor[2] << std::endl;
+
+        //glutPostRedisplay();
+        glFlush();
+
+        // Recursively fill neighboring pixels
+
+        //if(eraserTool){
+                floodFill(x + 1, y, fillColor, targetColor);
+                //floodFill(x, y + 1, fillColor, targetColor);
+                floodFill(x, y + 1, fillColor, targetColor);
+
+        //}
+        floodFill(x - 1, y, fillColor, targetColor);
+        //return;
+
+        floodFill(x, y - 1, fillColor, targetColor);
+    }
+    return;
+
+}
+
+void keyboard(unsigned char key, int x, int y) {
+
+    if (key == 69 || key == 101) {
+        eraserTool = true;
+        pencilTool = false;
+        lineTool = false;
+         paintTool =false;
+        //isErasing=false;
+        std::cout << "Eraser tool enabled" << std::endl;
+    } else if (key == 80 || key == 112) {
+        eraserTool = false;
+        pencilTool = true;
+        lineTool = false;
+         paintTool =false;
+        std::cout << "Pencil tool enabled" << std::endl;
+    }
+    else if (key == 108 || key == 86) {
+        eraserTool = false;
+        pencilTool = false;
+        lineTool = true;
+         paintTool =false;
+        std::cout << "Line tool enabled" << std::endl;
+    }
+    else if (key == 102 || key == 80) {
+
+        //GLubyte fillColor[] = {255, 0, 0};
+        //GLubyte targetColor[] = {255,255,255};
+        //floodFill(200,300,fillColor,targetColor);
+
+
+
+        eraserTool = false;
+        pencilTool = false;
+        lineTool = false;
+        paintTool =true;
+        glutPostRedisplay();
+        std::cout << "paint tool enabled" << std::endl;
+    }
+
+}
+
+
+
+void handleMouseClick(int button, int state, int x, int y) {
+    if (button == GLUT_LEFT_BUTTON) {
+        if (state == GLUT_DOWN) {
+
+
+
+            float posX = (2.0f * (float)x / glutGet(GLUT_WINDOW_WIDTH)) - 1.0f;
+            float posY = 1.0f - (2.0f * (float)y / glutGet(GLUT_WINDOW_HEIGHT));
+
+            if(paintTool){
+                float iposX = static_cast<float>(x);
+                float iposY = static_cast<float>(glutGet(GLUT_WINDOW_HEIGHT) - y);
+                //GLubyte fillColor[] = {255, 0, 0};
+
+                //GLubyte targetColor[3];
+                //glReadPixels(iposX, iposY, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, targetColor);
+                //floodFill(x,y,fillColor,targetColor);
+
+                //functionsToCall.push_back([&]() {
+                //floodFill(x,y,fillColor,targetColor);
+                //});
+                //
+
+
+
+                //std::cout << "R: " << (int)targetColor[0] << " G: " << (int)targetColor[1] << " B: " << (int)targetColor[2] << std::endl;
+
+            }
+
+
+
+            if(pencilTool){
+                    points.push_back(std::make_pair(posX, posY));
+                    isDrawing = true;
+
+                }
+
+            if(eraserTool){
+                    std::cout<<"erasing re";
+                    eraserCurves.push_back(std::make_pair(posX,posY));
+                    isErasing=true;
+
+            }
+            if(lineTool){
+                std::cout<<"line ";
+                    lineCurves[0]=std::make_pair(posX,posY);
+                    lineCurves[1]=std::make_pair(posX,posY);
+                    isLining=true;
+
+            }
+
+
+             //functionsToCall.push_back([tempPoints = points]() {
+                //drawline(tempPoints);
+            //});
+        }
+        else if (state == GLUT_UP) {
+            if(pencilTool){
+                isDrawing = false;
+
+                std::vector<std::pair<float, float>> tempPoints = points; // Capture the current state
+                functionsToCall.push_back([tempPoints]() {
+                drawline(tempPoints);
+                });
+
+                points.clear();
+            }
+                //ERASER TOOL START
+            if(eraserTool){
+                std::vector<std::pair<float, float>> temperasePoints = eraserCurves; // Capture the current state
+                functionsToCall.push_back([temperasePoints]() {
+                EraserTool(temperasePoints);
+                });
+                eraserCurves.clear();
+                    //isErasing=false;
+            }
+            if(lineTool){
+                    isLining=false;
+                std::vector<std::pair<float, float>> tempLinePoints = lineCurves; // Capture the current state
+                functionsToCall.push_back([tempLinePoints]() {
+                linetool(tempLinePoints);
+                });
+            lineCurves=lineCurves1;
+                //lineCurves.clear();
+                    //isErasing=false;
+            }
+
+                glutPostRedisplay();
+
+
+
+        }
+    }
+}
+
+void handleMouseMotion(int x, int y) {
+
+        float currX = (2.0f * (float)x / glutGet(GLUT_WINDOW_WIDTH)) - 1.0f;
+        float currY = 1.0f - (2.0f * (float)y / glutGet(GLUT_WINDOW_HEIGHT));
+        if (pencilTool&&isDrawing) {
+            points.push_back(std::make_pair(currX, currY));
+        }
+        if(eraserTool&&isErasing){
+            eraserCurves.push_back(std::make_pair(currX,currY));
+            //std::cout<<"testingyusd";
+        }
+
+        if(lineTool&&isLining){
+            lineCurves[1]=std::make_pair(currX,currY);
+            //std::cout<<lineCurves[1];
+        }
+        glutPostRedisplay();
+
+}
+
+void display() {
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    std::cout<<std::endl<<"display getting called"<<std::endl;
+
+
+    GLubyte fillColor[] = {255, 0, 0};
+    GLubyte targetColor[] = {255,255,255};
+
+
+
+
+
+    for (const auto &func : functionsToCall  ) {
+        func();
+    }
+    drawlinerealtime();
+    lineToolrealtime();
+    EraserToolrealtime();
+
+    glColor3f(0.0f, 0.0f, 0.0f); // Set color to black
+    glLineWidth(2.0f);           // Set line width
+
+    // Draw the rectangle
+    float ndcX = 2.0f * (700.0f / glutGet(GLUT_WINDOW_WIDTH)) - 1.0f;
+    float ndcY = 1.0f - 2.0f * (500.0f / glutGet(GLUT_WINDOW_HEIGHT));
+
+    float size = 30.0f / glutGet(GLUT_WINDOW_WIDTH); // Size in NDC
+
+    // Draw the rectangle
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(ndcX - size, ndcY + size); // Top-left corner
+    glVertex2f(ndcX - size, ndcY - size); // Bottom-left corner
+    glVertex2f(ndcX + size, ndcY - size); // Bottom-right corner
+    glVertex2f(ndcX + size, ndcY + size); // Top-right corner
+    glEnd();
+
+    if(paintTool){
+        //for(int i=200;i<=300;i++){
+
+                floodFill(700,500,fillColor,targetColor);
+
+
+        //}
+
+        //glutPostRedisplay();
+
+
+    }
+
+
+
+
+    glutSwapBuffers();
+}
+
+int main(int argc, char **argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitWindowSize(800, 600);
+    glutCreateWindow("Cursor as Pen (Double Buffering)");
+
+    glutDisplayFunc(display);
+    glutMouseFunc(handleMouseClick);
+    glutMotionFunc(handleMouseMotion);
+    glutKeyboardFunc(keyboard);
+
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+    glutMainLoop();
+
+    return 0;
+}

@@ -1,0 +1,5 @@
+In OpenGL, the extern keyword is used to declare a variable or function as being defined in another source file. 
+However, it's not commonly used with GLUT (OpenGL Utility Toolkit) functions. GLUT functions are typically included via header files, and you don't usually need to explicitly declare them as extern.
+link:- https://chat.openai.com/share/e8e573df-ae79-4b73-8912-3cea0d40fd9e
+
+srand():-  The srand() function is used in C and C++ programming to seed the random number generator provided by the rand() function. The random number generator generates pseudo-random numbers based on the seed value. Pseudo-random numbers are not truly random but are generated in a deterministic way that appears random.

@@ -1,0 +1,48 @@
+#include<iostream>
+#include<vector>
+# define ll long long
+# define pb push_back 
+# define vec vector<int>
+# define in int t; cin>>t; while(t--)
+using namespace std;
+
+
+
+int main(){
+    
+        ll n;
+        cin>>n;
+vector<ll>v ;
+int cc=0;
+for(int i=1;i<=n;i++){
+    int x;
+    cin>>x;
+    cc+=x;
+    v.pb(cc/i);
+}
+
+in{
+ 
+ int q;cin>>q;
+ int ans=0;
+
+ll lo=1;
+ll hi=n;
+while(hi-lo>0){
+    int mid=lo-(lo-hi)/2;
+    if(v[mid]<q){
+        lo = mid+1;
+        ans = mid+1;
+    }
+    else{
+        hi=mid-1;
+    }
+}
+cout<<ans<<"\n";
+
+
+
+}
+return 0;
+}
+//This is krishna.

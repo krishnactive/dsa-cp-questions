@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+# define ll long long
+# define pb push_back 
+# define vec vector<int>
+# define in int t; cin>>t; while(t--)
+using namespace std;
+int main(){
+    in{
+ll n;
+cin>>n;
+if(((n>>0)&1)==0){
+    cout<<"0\n";
+}
+else{
+    cout<<"1\n";
+}
+
+}
+return 0;
+}
+//This is krishna.

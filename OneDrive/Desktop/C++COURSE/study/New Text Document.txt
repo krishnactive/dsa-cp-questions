@@ -1,0 +1,34 @@
+The line `vector<int> v(n, -1);` initializes a vector named `v` with `n` elements, and each element is set to -1. Here's a breakdown of what this line does:
+
+- `vector<int>`: This declares a vector of integers. A vector is a dynamic array-like data structure in C++ that can store multiple values of the same type.
+
+- `v(n, -1)`: This part initializes the vector. The `n` in parentheses specifies the number of elements the vector should have. The `, -1` initializes each of these elements with the value -1.
+
+So, after this line executes, you'll have a vector `v` containing `n` elements, and all elements will be initialized to -1. This can be useful as a placeholder or default value for elements in certain situations, especially when you want to indicate that the value hasn't been set or used yet.
+
+For example, if you later decide to populate this vector with actual values, you can replace the -1 values with the appropriate data. Here's a simple example:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    int n = 5; // Number of elements in the vector
+    std::vector<int> v(n, -1);
+
+    // Populate the vector with some values
+    v[0] = 10;
+    v[2] = 25;
+    v[4] = 50;
+
+    // Display the vector
+    for (int num : v) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+```
+
+In this example, we initialized a vector of size 5 with -1 values, and then we assigned specific values to certain elements in the vector. The output would show something like: `10 -1 25 -1 50`.

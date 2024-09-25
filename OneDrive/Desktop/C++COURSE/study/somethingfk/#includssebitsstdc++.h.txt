@@ -1,0 +1,111 @@
+#include<bits/stdc++.h>
+# define ll long long
+# define pb push_back 
+# define vec vector<int>
+# define in int t; cin>>t; while(t--)
+using namespace std;
+int main(){
+    in{
+int n=0,m=0;
+int j=0;
+
+cin>>n>>m;
+
+if(n==1){
+    bool v=true,i=false,k=false,a=false;
+    string s;
+    cin>>s;
+    int count=0;
+    for(auto x:s){
+         if(x=='v'&&v){
+            count++;
+            v=false;
+            i=true;
+      
+          
+        }
+        if(x=='i'&&i){
+            count++;
+            i=false;
+            k=true;
+    
+        }
+        if(x=='k'&&k){
+            count++;
+            k=false;
+            a=true;
+        
+        }
+        if(x=='a'&&a){
+            count++;
+            a=false;
+        
+        }
+        if(count==4){
+            break;
+        }
+    }
+    if(count==4)
+cout<<"YES\n";
+
+else
+cout<<"NO\n";
+   
+}
+
+
+else{
+    bool v=true,i=false,k=false,a=false;
+    int count=0;
+    int aa=0;
+for(int ii=0;ii<n;ii++){
+    string s;
+    cin>>s;
+    
+    for(j=aa;j<m;j++){
+        if(s[j]=='v'&&v){
+            count++;
+            v=false;
+            i=true;
+            aa=j+1;
+            //break;
+        }
+     if(s[j]=='i'&&i){
+            count++;
+            i=false;
+            k=true;
+            aa=j+1;
+            //break;
+        }
+     if(s[j]=='k'&&k){
+            count++;
+            k=false;
+            a=true;
+           aa=j+1;
+            //break;
+        }
+        if(s[j]=='a'&&a){
+            count++;
+            a=false;
+            aa=j+1;
+           // break;
+        }
+        if(count==4){
+            break;
+        }
+
+
+    }
+    if(count==4){
+            break;
+        }
+}
+if(count==4)
+cout<<"YES\n";
+
+else
+cout<<"NO\n";}
+}
+return 0;
+}
+//This is krishna.

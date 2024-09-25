@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+# define ll long long
+# define pb push_back 
+# define vec vector<int>
+# define in int t; cin>>t; while(t--)
+using namespace std;
+int main(){
+    in{
+ll x,y,n;
+cin>>x>>y>>n;
+ll yy=y;
+vector<ll>ans(n);
+if(y-x+1>=n){
+    //cout<<x<<" ";
+    ans[0]=x;
+    for(int i=1;i<=n-2;i++){
+        //cout<<yy-i<<" ";
+        ans[n-1+i]=yy-i;
+        yy-=i;
+    }
+//  for(auto x:ans){
+//             cout<<x<<" ";
+//         }
+    //cout<<y<<'\n';
+    ans[n-1]=y;
+    vector<ll>check;
+    for(int i=0;i<n-1;i++){
+        check.pb(ans[i]-ans[i+1]);
+    }
+    if(is_sorted(check.begin(),check.end())){
+        for(auto x:ans){
+            cout<<x<<" ";
+        }
+        cout<<"\n";
+    }
+    else cout<<"-1\n";
+}
+else cout<<"-1\n";
+
+}
+return 0;
+}
