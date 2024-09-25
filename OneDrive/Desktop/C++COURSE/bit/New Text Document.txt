@@ -1,0 +1,2 @@
+https://codeforces.com/blog/entry/120165
+prefix sum very much important it can  reduce tle always in search of it got it
